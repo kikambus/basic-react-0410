@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react'
+import CommentList from './comment-list';
 
 class Article extends PureComponent {
   render() {
-    console.log('---', 'rendering article')
+    //console.log('---', 'rendering article')
     const { article, isOpen } = this.props
     const text = isOpen ? 'close' : 'open'
     return (
@@ -15,15 +16,23 @@ class Article extends PureComponent {
   }
 
   setTitleRef = (ref) => {
-    console.log('---', 'article title', ref)
+    //console.log('---', 'article title', ref)
   }
 
   onButtonClick = () => this.props.toggleOpen(this.props.article.id)
 
   get body() {
     const { isOpen, article } = this.props
+    
+    console.log('---1', article.comments);
     if (!isOpen) return null
-    return <section>{article.text}</section>
+
+    return (
+      <section>
+        {article.text}
+        <CommentList comments={article.comments}/>
+      </section>
+    )
   }
 }
 
