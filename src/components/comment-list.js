@@ -3,22 +3,27 @@ import Comment from './comment';
 import toggleDecorator from '../decorators/toggle'
 
 class CommentList extends Component {
+  state = {
+    isOpen: false
+  };
 
   render() {
+     const text = this.state.isOpen ? 'Close comments' : 'Open comments';
+     const commentBody = this.state.isOpen ? <ul>{this.commentItem}</ul> : '';
+
      return (
        <div>
-         <button onClick={this.commentToggle}>Open Comments</button>
+           <h3>Comments: <button onClick={this.commentToggle}>{text}</button></h3>
 
-         <h3>Comments:</h3>
-         <ul>
-           {this.commentItem}
-         </ul>
+           {commentBody}
        </div>
      )
   }
 
-  commentToggle() {
-    console.log('---click!');
+  commentToggle = () => {
+      this.setState({
+          isOpen: !this.state.isOpen
+      });
   }
 
   get commentItem() {
@@ -29,7 +34,7 @@ class CommentList extends Component {
 
         <Comment
           comment={comment.text}
-          // isOpen={openItemId === comment.id}
+          //isOpen={openItemId === comment.id}
           // toggleOpen={toggleOpenItem}
         />
 
