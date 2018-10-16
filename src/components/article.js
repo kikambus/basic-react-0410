@@ -1,7 +1,13 @@
 import React, { PureComponent } from 'react'
 import CommentList from './comment-list';
+import PropTypes from 'prop-types'
 
 class Article extends PureComponent {
+  static propTypes = {
+    isOpen: PropTypes.bool,
+    article: PropTypes.object
+  }
+
   render() {
     //console.log('---', 'rendering article')
     const { article, isOpen } = this.props
